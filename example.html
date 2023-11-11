@@ -1,0 +1,97 @@
+<html>
+<head>
+<style>
+.board {
+  width: 75%;
+  float: left;
+}
+.right {
+width: 25%;
+float: right;
+}
+
+.camera {
+height: 25%;
+}
+
+.pole {
+height: 25%;
+}
+
+.roulettes {
+height: 25%;
+}
+.roulette {
+width: 100%;
+}
+.interferences {
+height: 25%;
+}
+
+.cell {
+width: 50px;
+height: 50px;
+}
+
+
+</style>
+
+</head>
+<body>
+<div class="board">
+  <table style="width: 100%; height: 100%; background-image: url('snake.jpg');" id="myTable">
+  <tr>  
+  <td>Cell 4</td>
+  <td>Cell 5</td>  
+  <td>Cell 6</td>
+</tr> 
+<tr>  
+  <td>Cell 4</td>
+  <td>Cell 5</td>  
+  <td>Cell 6</td>
+</tr>
+<tr>  
+  <td>Cell 4</td>
+  <td>Cell 5</td>  
+  <td>Cell 6</td>
+</tr><tr>  
+  <td>Cell 4</td>
+  <td>Cell 5</td>  
+  <td>Cell 6</td>
+</tr><tr>  
+  <td>Cell 4</td>
+  <td>Cell 5</td>  
+  <td>Cell 6</td>
+</tr>
+
+<!-- and so on for a 10x10 table -->
+  </table>
+</div>
+<div class="right">
+  <div class="camera"></div> <!-- Место под камеру -->
+  <div class="pole" style="background-image: url('nardypole-1.jpg');"></div> <!-- Место под бросание кубиков -->
+  <div class="roulettes";">
+  <table>	<!-- Рулетки помех -->
+  <tr>
+      <td><img class="roulette" src="kazino-1.jpg" id="small-roulette"></td>  
+      <td><img class="roulette" src="kazino-1.jpg" id="medium-roulette"></td>
+	  <td><img class="roulette" src="kazino-1.jpg" id="medium-roulette"></td>
+	  </tr>
+	   <tr>
+  <td><button>Маленькая помеха</button></td>
+  <td><button>Средняя помеха</button></td> 
+  <td><button>Большая помеха</button></td> 
+</tr>
+	</table>
+	  </div>
+ <div class="interferences"></div> <!-- кнопки доната помех -->
+ <table>
+ <tr>
+  <td><button>Маленькая помеха</button></td>
+  <td><button>Средняя помеха</button></td> 
+  <td><button>Большая помеха</button></td> 
+</tr>
+  </table>
+</div>
+</body>
+</html>
