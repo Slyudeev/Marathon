@@ -1,12 +1,24 @@
 <html>
 <head>
 <style>
-.board {
-  width: 75%;
+
+.left {
+  width: 66%;
+  height: 950;
   float: left;
+  background-image: url('resources/snake.jpg');
+  background-repeat: no-repeat;
+  background-size: cover
+}
+.board {
+margin-left: 50;
+margin-top: 40;
+width: 93%;
+height: 92%;
+
 }
 .right {
-width: 25%;
+width: 33%;
 float: right;
 }
 
@@ -14,8 +26,11 @@ float: right;
 height: 25%;
 }
 
-.pole {
+.dice {
 height: 25%;
+background-image: url('resources/nardypole-1.jpg');
+background-repeat: no-repeat;
+background-size: cover
 }
 
 .roulettes {
@@ -23,75 +38,176 @@ height: 25%;
 }
 .roulette {
 width: 100%;
+height: 100%;
 }
 .interferences {
 height: 25%;
 }
 
 .cell {
-width: 50px;
-height: 50px;
+height: 10%;
+width: 10%;
 }
-
+.koala_coin{
+    background-image: url('resources/koala.jpg');
+	background-size: cover;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 10px auto;
+}
 
 </style>
 
 </head>
 <body>
-<div class="board">
-  <table style="width: 100%; height: 100%; background-image: url('snake.jpg');" id="myTable">
-  <tr>  
-  <td>Cell 4</td>
-  <td>Cell 5</td>  
-  <td>Cell 6</td>
+<div class="left">
+  <table class="board" id="myBoard">
+  <tr>
+<td class="cell" id="100"></td>
+<td class="cell" id="99"></td>
+<td class="cell" id="98"></td>
+<td class="cell" id="97"></td>
+<td class="cell" id="96"></td>
+<td class="cell" id="95"></td>
+<td class="cell" id="94"></td>
+<td class="cell" id="93"></td>
+<td class="cell" id="92"></td>
+<td class="cell" id="91"></td>
 </tr> 
 <tr>  
-  <td>Cell 4</td>
-  <td>Cell 5</td>  
-  <td>Cell 6</td>
-</tr>
+<td class="cell" id="81"></td>
+<td class="cell" id="82"></td>
+<td class="cell" id="83"></td>
+<td class="cell" id="84"></td>
+<td class="cell" id="85"></td>
+<td class="cell" id="86"></td>
+<td class="cell" id="87"></td>
+<td class="cell" id="88"></td>
+<td class="cell" id="89"></td>
+<td class="cell" id="90"></td>
+</tr> 
 <tr>  
-  <td>Cell 4</td>
-  <td>Cell 5</td>  
-  <td>Cell 6</td>
-</tr><tr>  
-  <td>Cell 4</td>
-  <td>Cell 5</td>  
-  <td>Cell 6</td>
-</tr><tr>  
-  <td>Cell 4</td>
-  <td>Cell 5</td>  
-  <td>Cell 6</td>
-</tr>
+<td class="cell" id="80"></td>
+<td class="cell" id="79"></td>
+<td class="cell" id="78"></td>
+<td class="cell" id="77"></td>
+<td class="cell" id="76"></td>
+<td class="cell" id="75"></td>
+<td class="cell" id="74"></td>
+<td class="cell" id="73"></td>
+<td class="cell" id="72"></td>
+<td class="cell" id="71"></td>
+</tr> 
+<tr>  
+<td class="cell" id="61"></td>
+<td class="cell" id="62"></td>
+<td class="cell" id="63"></td>
+<td class="cell" id="64"></td>
+<td class="cell" id="65"></td>
+<td class="cell" id="66"></td>
+<td class="cell" id="67"></td>
+<td class="cell" id="68"></td>
+<td class="cell" id="69"></td>
+<td class="cell" id="70"></td>
+</tr> 
+<tr>  
+<td class="cell" id="60"></td>
+<td class="cell" id="59"></td>
+<td class="cell" id="58"></td>
+<td class="cell" id="57"></td>
+<td class="cell" id="56"></td>
+<td class="cell" id="55"></td>
+<td class="cell" id="54"></td>
+<td class="cell" id="53"></td>
+<td class="cell" id="52"></td>
+<td class="cell" id="51"></td>
+</tr> 
+<tr>  
+<td class="cell" id="41"></td>
+<td class="cell" id="42"></td>
+<td class="cell" id="43"></td>
+<td class="cell" id="44"></td>
+<td class="cell" id="45"></td>
+<td class="cell" id="46"></td>
+<td class="cell" id="47"></td>
+<td class="cell" id="48"></td>
+<td class="cell" id="49"></td>
+<td class="cell" id="50"></td>
+</tr> 
+<tr>  
+<td class="cell" id="40"></td>
+<td class="cell" id="39"></td>
+<td class="cell" id="38"></td>
+<td class="cell" id="37"></td>
+<td class="cell" id="36"></td>
+<td class="cell" id="35"></td>
+<td class="cell" id="34"></td>
+<td class="cell" id="33"></td>
+<td class="cell" id="32"></td>
+<td class="cell" id="31"></td>
+</tr> 
+<tr>  
+<td class="cell" id="21"></td>
+<td class="cell" id="22"></td>
+<td class="cell" id="23"></td>
+<td class="cell" id="24"></td>
+<td class="cell" id="25"></td>
+<td class="cell" id="26"></td>
+<td class="cell" id="27"></td>
+<td class="cell" id="28"></td>
+<td class="cell" id="29"></td>
+<td class="cell" id="30"></td>
+</tr> 
+<tr>  
+<td class="cell" id="20"></td>
+<td class="cell" id="19"></td>
+<td class="cell" id="18"></td>
+<td class="cell" id="17"></td>
+<td class="cell" id="16"></td>
+<td class="cell" id="15"></td>
+<td class="cell" id="14"></td>
+<td class="cell" id="13"></td>
+<td class="cell" id="12"></td>
+<td class="cell" id="11"></td>
+</tr> 
+<tr>  
+<td class="cell" id="1"><div class="koala_coin" id="koala"/></td>
+<td class="cell" id="2"></td>
+<td class="cell" id="3"></td>
+<td class="cell" id="4"></td>
+<td class="cell" id="5"></td>
+<td class="cell" id="6"></td>
+<td class="cell" id="7"></td>
+<td class="cell" id="8"></td>
+<td class="cell" id="9"></td>
+<td class="cell" id="10"></td>
+</tr> 
+
 
 <!-- and so on for a 10x10 table -->
   </table>
 </div>
 <div class="right">
-  <div class="camera"></div> <!-- РњРµСЃС‚Рѕ РїРѕРґ РєР°РјРµСЂСѓ -->
-  <div class="pole" style="background-image: url('nardypole-1.jpg');"></div> <!-- РњРµСЃС‚Рѕ РїРѕРґ Р±СЂРѕСЃР°РЅРёРµ РєСѓР±РёРєРѕРІ -->
+  <div class="camera">
+  <h1 id="dicetext"></h1>
+  <tr/><h1 id="alerts"></h1></div> <!-- Место под камеру -->
+  <div class="dice" id="dice"></div> <!-- Место под бросание кубиков -->
   <div class="roulettes";">
-  <table>	<!-- Р СѓР»РµС‚РєРё РїРѕРјРµС… -->
+  <table>	<!-- Рулетки помех -->
   <tr>
-      <td><img class="roulette" src="kazino-1.jpg" id="small-roulette"></td>  
-      <td><img class="roulette" src="kazino-1.jpg" id="medium-roulette"></td>
-	  <td><img class="roulette" src="kazino-1.jpg" id="medium-roulette"></td>
+      <td><img class="roulette" src="resources/kazino-1.jpg" id="small-roulette"></td>  
+      <td><img class="roulette" src="resources/kazino-1.jpg" id="medium-roulette"></td>
+	  <td><img class="roulette" src="resources/kazino-1.jpg" id="medium-roulette"></td>
 	  </tr>
 	   <tr>
-  <td><button>РњР°Р»РµРЅСЊРєР°СЏ РїРѕРјРµС…Р°</button></td>
-  <td><button>РЎСЂРµРґРЅСЏСЏ РїРѕРјРµС…Р°</button></td> 
-  <td><button>Р‘РѕР»СЊС€Р°СЏ РїРѕРјРµС…Р°</button></td> 
+  <td><button>Маленькая помеха</button></td>
+  <td><button>Средняя помеха</button></td> 
+  <td><button>Большая помеха</button></td> 
 </tr>
 	</table>
 	  </div>
- <div class="interferences"></div> <!-- РєРЅРѕРїРєРё РґРѕРЅР°С‚Р° РїРѕРјРµС… -->
- <table>
- <tr>
-  <td><button>РњР°Р»РµРЅСЊРєР°СЏ РїРѕРјРµС…Р°</button></td>
-  <td><button>РЎСЂРµРґРЅСЏСЏ РїРѕРјРµС…Р°</button></td> 
-  <td><button>Р‘РѕР»СЊС€Р°СЏ РїРѕРјРµС…Р°</button></td> 
-</tr>
-  </table>
-</div>
+
 </body>
+<script type="text/javascript" src="script.js" ></script>
 </html>
