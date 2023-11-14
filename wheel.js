@@ -2,42 +2,42 @@
 const small = [
   {
     text: "Маленькая помеха 1",
-	descrition: "попрыгать на одной ноге",
+	description: "попрыгать на одной ноге",
     color: "hsl(197 30% 43%)",
   },
   { 
     text: "Маленькая помеха 2",
-	descrition: "Какая-то помеха за второй пункт",
+	description: "Какая-то помеха за второй пункт",
     color: "hsl(173 58% 39%)",
   },
   { 
     text: "Маленькая помеха 3",
-	descrition: "Придумать третий пункт",
+	description: "Придумать третий пункт",
     color: "hsl(43 74% 66%)",
   },
   {
     text: "Маленькая помеха 4",
-	descrition: "Что-то мешающее четвёртое",
+	description: "Что-то мешающее четвёртое",
     color: "hsl(27 87% 67%)",
   },
   {
     text: "Маленькая помеха 5",
-	descrition: "Памагити закончилась фантазия на 5 пункте",
+	description: "Памагити закончилась фантазия на 5 пункте",
     color: "hsl(12 76% 61%)",
   },
   {
     text: "Маленькая помеха 6",
-	descrition: "Жесть, уже 6 пункт, а я ещё ничего не придумал",
+	description: "Жесть, уже 6 пункт, а я ещё ничего не придумал",
     color: "hsl(350 60% 52%)",
   },
   {
     text: "Маленькая помеха 7",
-	descrition: "Попросить зрителей придумать помеху",
+	description: "Попросить зрителей придумать помеху",
     color: "hsl(91 43% 54%)",
   },
   {
     text: "Маленькая помеха 8",
-	descrition: "Одна голова хорошо, а 8 голов вызывают подозрения",
+	description: "Одна голова хорошо, а 8 голов вызывают подозрения",
     color: "hsl(140 36% 74%)",
   }
 ];
@@ -45,42 +45,42 @@ const small = [
 const medium = [
   {
     text: "Средняя помеха 1",
-	descrition: "попрыгать на одной ноге",
+	description: "попрыгать на одной ноге",
     color: "hsl(197 30% 43%)",
   },
   { 
     text: "Средняя помеха 2",
-	descrition: "Какая-то помеха за второй пункт",
+	description: "Какая-то помеха за второй пункт",
     color: "hsl(173 58% 39%)",
   },
   { 
     text: "Средняя помеха 3",
-	descrition: "Придумать третий пункт",
+	description: "Придумать третий пункт",
     color: "hsl(43 74% 66%)",
   },
   {
     text: "Средняя помеха 4",
-	descrition: "Что-то мешающее четвёртое",
+	description: "Что-то мешающее четвёртое",
     color: "hsl(27 87% 67%)",
   },
   {
     text: "Средняя помеха 5",
-	descrition: "Памагити закончилась фантазия на 5 пункте",
+	description: "Памагити закончилась фантазия на 5 пункте",
     color: "hsl(12 76% 61%)",
   },
   {
     text: "Средняя помеха 6",
-	descrition: "Жесть, уже 6 пункт, а я ещё ничего не придумал",
+	description: "Жесть, уже 6 пункт, а я ещё ничего не придумал",
     color: "hsl(350 60% 52%)",
   },
   {
     text: "Средняя помеха 7",
-	descrition: "Попросить зрителей придумать помеху",
+	description: "Попросить зрителей придумать помеху",
     color: "hsl(91 43% 54%)",
   },
   {
     text: "Средняя помеха 8",
-	descrition: "Одна голова хорошо, а 8 голов вызывают подозрения",
+	description: "Одна голова хорошо, а 8 голов вызывают подозрения",
     color: "hsl(140 36% 74%)",
   }
 ];
@@ -88,42 +88,42 @@ const medium = [
 const big = [
   {
     text: "Большая помеха 1",
-	descrition: "попрыгать на одной ноге",
+	description: "попрыгать на одной ноге",
     color: "hsl(197 30% 43%)",
   },
   { 
     text: "Большая помеха 2",
-	descrition: "Какая-то помеха за второй пункт",
+	description: "Какая-то помеха за второй пункт",
     color: "hsl(173 58% 39%)",
   },
   { 
     text: "Большая помеха 3",
-	descrition: "Придумать третий пункт",
+	description: "Придумать третий пункт",
     color: "hsl(43 74% 66%)",
   },
   {
     text: "Большая помеха 4",
-	descrition: "Что-то мешающее четвёртое",
+	description: "Что-то мешающее четвёртое",
     color: "hsl(27 87% 67%)",
   },
   {
     text: "Большая помеха 5",
-	descrition: "Памагити закончилась фантазия на 5 пункте",
+	description: "Памагити закончилась фантазия на 5 пункте",
     color: "hsl(12 76% 61%)",
   },
   {
     text: "Большая помеха 6",
-	descrition: "Жесть, уже 6 пункт, а я ещё ничего не придумал",
+	description: "Жесть, уже 6 пункт, а я ещё ничего не придумал",
     color: "hsl(350 60% 52%)",
   },
   {
     text: "Большая помеха 7",
-	descrition: "Попросить зрителей придумать помеху",
+	description: "Попросить зрителей придумать помеху",
     color: "hsl(91 43% 54%)",
   },
   {
     text: "Большая помеха 8",
-	descrition: "Одна голова хорошо, а 8 голов вызывают подозрения",
+	description: "Одна голова хорошо, а 8 голов вызывают подозрения",
     color: "hsl(140 36% 74%)",
   }
 ];
@@ -138,11 +138,11 @@ const ticker = wheel.querySelector(".ticker");
 const smallbtn = document.querySelector(".smallW");
 const mediumbtn = document.querySelector(".mediumW");
 const bigbtn = document.querySelector(".bigW");
+const description = document.querySelector(".description");
 // на сколько секторов нарезаем круг
 let prizeSlice = 360 / prizes.length;
 // на какое расстояние смещаем сектора друг относительно друга
 let prizeOffset = Math.floor(180 / prizes.length);
-
 // прописываем CSS-классы, которые будем добавлять и убирать из стилей
 const spinClass = "is-spinning";
 const selectedClass = "selected";
@@ -252,10 +252,13 @@ const selectPrize = () => {
   prizeNodes[selected].classList.add(selectedClass);
   console.log(prizes[selected]);
   console.log(prizes);
-  alert('Выпала ' + prizes[selected].text);
-  prizes.splice(selected,1);
+  //alert('Выпала ' + prizes[selected].text);
+  //alert(prizes[selected].description)
+  description.innerHTML = '';
+  typeInterference(prizes[selected].description, 2000);
   spinner.innerHTML = '';
   
+  prizes.splice(selected,1);
   setupWheel();
   
   console.log(prizes);
@@ -295,6 +298,25 @@ spinner.addEventListener("transitionend", () => {
   // делаем кнопку снова активной
   //trigger.disabled = false;
 });
+function typeInterference(text, time) {
+  let currentTime = 0;
+  let interval = time / text.length;
+  
+  const timer = setInterval(() => {
+    let nextChar = text[currentTime];
+    currentTime += 1;
+	console.log(nextChar);
+    description.innerHTML += nextChar;
+
+    if (currentTime < text.length) {
+      return;
+    }
+
+    clearInterval(timer);
+  }, interval);
+}
+
+
  function setprize(obj) {
 	 switch(obj.id) {
 	 case 'small': prizes = small; break;
@@ -302,6 +324,7 @@ spinner.addEventListener("transitionend", () => {
 	 case 'big': prizes = big; break;
 	 }
 	 spinner.innerHTML = '';
+	 description.innerText = 'Щёлкнуть на колесо для выбора помехи';
 	 setupWheel();
     }
 // подготавливаем всё к первому запуску

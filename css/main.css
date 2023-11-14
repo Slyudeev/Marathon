@@ -4,7 +4,6 @@ float: left;
 background-image: url('../resources/snake.jpg');
 background-repeat: no-repeat;
 background-size: 100% 100%;
-border: solid; 
 border-color: green;
 }
 .board {
@@ -14,7 +13,6 @@ margin-right: 4%;
 margin-bottom: 3%;
 width: 92%;
 height: 94%;
-border: solid; 
 border-color: red;
 
 }
@@ -50,7 +48,6 @@ width: 10%;
 }
 
 .cell {
-border: solid;
 height: 10%;
 }
 .koala_coin{
