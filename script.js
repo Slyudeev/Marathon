@@ -1,8 +1,11 @@
-var dice_button = document.getElementById("dice");
+import {throwDice} from './js/dice.js';
+import {getDiceResult} from './js/dice.js';
+var dice_button = document.getElementById("dice-btn");
 var dice_number = 0;
 var player_name = document.getElementById("koala");
 var alerts = document.getElementById("alerts"); 
-var dicetext = document.getElementById("dicetext"); 
+var dicetext = document.getElementById("score-result"); 
+var dicearea = document.getElementById("dicearea"); 
 
 const snakePositions = [
   { start: 17, end: 13 },
@@ -25,13 +28,13 @@ const ladderPositions = [
 ];
 
 var player1_coin = document.getElementById("koala");
-/* Если нужен будет второй игрок
+/* Р•СЃР»Рё РЅСѓР¶РµРЅ Р±СѓРґРµС‚ РІС‚РѕСЂРѕР№ РёРіСЂРѕРє
 var player2_coin = document.createElement("div");
 player2_coin.setAttribute("id", "player_coin2");
 player2_coin.innerText = "P2";
 */
-var current_player = true; //лучше число, если игроков будет больше 2
-var player_counter = [1, 1, 1]; //Рассчитано на 3 игроков
+var current_player = true; //Р»СѓС‡С€Рµ С‡РёСЃР»Рѕ, РµСЃР»Рё РёРіСЂРѕРєРѕРІ Р±СѓРґРµС‚ Р±РѕР»СЊС€Рµ 2
+var player_counter = [1, 1, 1]; //Р Р°СЃСЃС‡РёС‚Р°РЅРѕ РЅР° 3 РёРіСЂРѕРєРѕРІ
 
 window.addEventListener("load", start);
 
@@ -39,10 +42,17 @@ window.addEventListener("load", start);
 function start() {
   dice_button.addEventListener("click", dice_rolled);
 }
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+};
 
-
-function dice_rolled() {
-  dice_number.innerText = random();
+async function dice_rolled() {
+  dicearea.style.opacity = 1;
+  //console.log(throwD(1));
+  throwDice();
+  await sleep(2000);
+  dice_number = getDiceResult();
+  //random();
   //append_element(player_picker());
   append_element(1);
 }
@@ -53,7 +63,7 @@ function random() {
     random_number = 11 - random_number;
   }
   dice_number = random_number;
-  dicetext.innerText = `Выпало значение ${random_number}`;
+  dicetext.innerText = `Р’С‹РїР°Р»Рѕ Р·РЅР°С‡РµРЅРёРµ ${random_number}`;
   return random_number;
 }
 /*
@@ -86,7 +96,7 @@ function counter(player) {
     player_counter[player] =
       player_counter[player] + Number(dice_number);
 	  var tmp = player_counter[player] - Number(dice_number);
-	  alerts.innerText = `Перешла с поля ${player_counter[player] - Number(dice_number)} на поле ${player_counter[player]}`;
+	  alerts.innerText = `РџРµСЂРµС€Р»Р° СЃ РїРѕР»СЏ ${player_counter[player] - Number(dice_number)} РЅР° РїРѕР»Рµ ${player_counter[player]}`;
   }
 }
 
@@ -103,21 +113,21 @@ function append_element(player) {
 }
 
 function snake_or_ladder(counter, player) {
-  for (i = 0; i < snakePositions.length; i++) {
+  for (var i = 0; i < snakePositions.length; i++) {
     const { start, end } = snakePositions[i];
     if (counter == start) {
       player_counter[player] = end;
       after_snake_or_ladder(player);
-	  alerts.innerText = `Коала сползла по змее на поле ${end}`;
+	  alerts.innerText = `РљРѕР°Р»Р° СЃРїРѕР»Р·Р»Р° РїРѕ Р·РјРµРµ РЅР° РїРѕР»Рµ ${end}`;
     }
   }
 
-  for (j = 0; j < ladderPositions.length; j++) {
+  for (var j = 0; j < ladderPositions.length; j++) {
     const { start, end } = ladderPositions[j];
     if (counter == start) {
       player_counter[player] = end;
       after_snake_or_ladder(player);
-	  alerts.innerText = `Коала поднялась по лестнице на поле ${end}`;
+	  alerts.innerText = `РљРѕР°Р»Р° РїРѕРґРЅСЏР»Р°СЃСЊ РїРѕ Р»РµСЃС‚РЅРёС†Рµ РЅР° РїРѕР»Рµ ${end}`;
     }
   }
 

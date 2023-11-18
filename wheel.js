@@ -146,9 +146,10 @@ let prizeOffset = Math.floor(180 / prizes.length);
 // прописываем CSS-классы, которые будем добавлять и убирать из стилей
 const spinClass = "is-spinning";
 const selectedClass = "selected";
+let selected = 0;
 // получаем все значения параметров стилей у секторов
 const spinnerStyles = window.getComputedStyle(spinner);
-
+let startWheel = true;
 // переменная для анимации
 let tickerAnim;
 // угол вращения
@@ -248,7 +249,7 @@ const runTickerAnimation = () => {
 
 // функция выбора призового сектора
 const selectPrize = () => {
-  const selected = Math.floor(rotation / prizeSlice);
+  selected = Math.floor(rotation / prizeSlice);
   prizeNodes[selected].classList.add(selectedClass);
   console.log(prizes[selected]);
   console.log(prizes);
@@ -256,17 +257,30 @@ const selectPrize = () => {
   //alert(prizes[selected].description)
   description.innerHTML = '';
   typeInterference(prizes[selected].description, 2000);
-  spinner.innerHTML = '';
-  
-  prizes.splice(selected,1);
-  setupWheel();
-  
-  console.log(prizes);
+
 
 };
 
 // отслеживаем нажатие на кнопку
 spinner.addEventListener("click", () => {
+if(startWheel){
+	startWheel = false;
+	spin();
+} else{
+	rest(selected);
+	startWheel = true;
+}
+});
+
+function rest(selected){
+  description.innerHTML = 'Помеха ' + prizes[selected].text +' удалена';
+  prizes.splice(selected,1);
+  spinner.innerHTML = '';
+  setupWheel();
+  
+}
+
+function spin(){ 
   // делаем её недоступной для нажатия
   spinner.disabled = true;
   // задаём начальное вращение колеса
@@ -281,7 +295,7 @@ spinner.addEventListener("click", () => {
   ticker.style.animation = "none";
   // запускаем анимацию вращение
   runTickerAnimation();
-});
+}
 
 // отслеживаем, когда закончилась анимация вращения колеса
 spinner.addEventListener("transitionend", () => {
@@ -305,7 +319,6 @@ function typeInterference(text, time) {
   const timer = setInterval(() => {
     let nextChar = text[currentTime];
     currentTime += 1;
-	console.log(nextChar);
     description.innerHTML += nextChar;
 
     if (currentTime < text.length) {
@@ -323,6 +336,7 @@ function typeInterference(text, time) {
 	 case 'medium': prizes = medium; break;
 	 case 'big': prizes = big; break;
 	 }
+	 startWheel = true;
 	 spinner.innerHTML = '';
 	 description.innerText = 'Щёлкнуть на колесо для выбора помехи';
 	 setupWheel();

@@ -3,6 +3,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link rel="stylesheet" type="text/css" href="css/wheel.css" />
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
+	<link rel="stylesheet" type="text/css" href="css/dice.css" />
 <style>
 
 
@@ -10,6 +11,8 @@
 
 </head>
 <body>
+    <aside id="dicearea" class="dicearea"><canvas class="canvas" id="dices"></canvas></aside>
+
 <div class="left">
   <table class="board" id="myBoard">
   <tr class="board-column">
@@ -132,22 +135,22 @@
 <td class="cell" id="9"></td>
 <td class="cell" id="10"></td>
 </tr> 
-
-
-<!-- and so on for a 10x10 table -->
   </table>
 </div>
 <div class="right">
-  <div class="camera">
-  <h1 id="dicetext"></h1>
-  <tr/><h1 id="alerts"></h1></div> <!-- Место под камеру -->
-  <div class="dice" id="dice"></div> <!-- Место под бросание кубиков -->
+  <div class="camera" id="score-result">
+  
+  </div> <!-- Место под камеру -->
+  <div id="dicetext"><tr/><h1 id="alerts"></h1></div>
+  <!--div><canvas class="canvas" id="dicearea"></canvas></div> <!-- Место под бросание кубиков-->
+  <button id="dice-btn">Кинуть кубики</button>
   <div class="roulettes">
   <table >	<!-- Рулетки помех -->
   <td><a href="#example" class="openModal" id="small" onClick = "setprize(this)">Маленькая помеха</a></td>
   <td><a href="#example" class="openModal" id="medium" onClick = "setprize(this)">Средняя помеха</a></td>
   <td><a href="#example" class="openModal" id="big" onClick = "setprize(this)">Большая помеха</a></td>
   </table>
+	  </div>
 	  </div>
 <aside id="example" class="roulette">
 		<div>
@@ -161,6 +164,15 @@
 		</div>
 	</aside>
 </body>
-<script type="text/javascript" src="script.js" ></script>
+		<script type="importmap">
+		  {
+			"imports": {
+			  "three": "https://unpkg.com/three@0.138.0/build/three.module.js",
+			  "three/addons/": "https://unpkg.com/three@0.138.0/examples/jsm/"
+			}
+		  }
+		</script>
+<script type="module" src="script.js" ></script>
 <script type="text/javascript" src="wheel.js" ></script>
+<script type="module" src="js/dice.js" ></script>
 </html>
