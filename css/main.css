@@ -59,3 +59,27 @@ height: 10%;
     border-radius: 50%;
     margin: 10px auto;
 }
+
+.cookies {
+margin: 1em auto;
+display: block;
+width: 200px;
+background: #ccc;
+text-align: center;
+padding: 10px;
+-moz-border-radius: 7px;
+border-radius: 7px;
+background: -moz-linear-gradient(#fff, #ddd);
+background: -webkit-gradient(linear, right top, right bottom, from(rgb(255,255,255)), to(rgb(230,230,230)));
+text-shadow: 0 1px 0 #fff;
+border: 1px solid rgba(0,0,0,0.1);
+-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+}
+
+.cookies:hover,
+.cookiesl:focus {
+background: -moz-linear-gradient(#fff, #ccc);
+background: -webkit-gradient(linear, right top, right bottom, from(rgb(255,255,255)), to(rgb(200,200,200)));
+}

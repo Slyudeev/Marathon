@@ -1,132 +1,4 @@
 // надписи и цвета на секторах
-const small = [
-  {
-    text: "Маленькая помеха 1",
-	description: "попрыгать на одной ноге",
-    color: "hsl(197 30% 43%)",
-  },
-  { 
-    text: "Маленькая помеха 2",
-	description: "Какая-то помеха за второй пункт",
-    color: "hsl(173 58% 39%)",
-  },
-  { 
-    text: "Маленькая помеха 3",
-	description: "Придумать третий пункт",
-    color: "hsl(43 74% 66%)",
-  },
-  {
-    text: "Маленькая помеха 4",
-	description: "Что-то мешающее четвёртое",
-    color: "hsl(27 87% 67%)",
-  },
-  {
-    text: "Маленькая помеха 5",
-	description: "Памагити закончилась фантазия на 5 пункте",
-    color: "hsl(12 76% 61%)",
-  },
-  {
-    text: "Маленькая помеха 6",
-	description: "Жесть, уже 6 пункт, а я ещё ничего не придумал",
-    color: "hsl(350 60% 52%)",
-  },
-  {
-    text: "Маленькая помеха 7",
-	description: "Попросить зрителей придумать помеху",
-    color: "hsl(91 43% 54%)",
-  },
-  {
-    text: "Маленькая помеха 8",
-	description: "Одна голова хорошо, а 8 голов вызывают подозрения",
-    color: "hsl(140 36% 74%)",
-  }
-];
-
-const medium = [
-  {
-    text: "Средняя помеха 1",
-	description: "попрыгать на одной ноге",
-    color: "hsl(197 30% 43%)",
-  },
-  { 
-    text: "Средняя помеха 2",
-	description: "Какая-то помеха за второй пункт",
-    color: "hsl(173 58% 39%)",
-  },
-  { 
-    text: "Средняя помеха 3",
-	description: "Придумать третий пункт",
-    color: "hsl(43 74% 66%)",
-  },
-  {
-    text: "Средняя помеха 4",
-	description: "Что-то мешающее четвёртое",
-    color: "hsl(27 87% 67%)",
-  },
-  {
-    text: "Средняя помеха 5",
-	description: "Памагити закончилась фантазия на 5 пункте",
-    color: "hsl(12 76% 61%)",
-  },
-  {
-    text: "Средняя помеха 6",
-	description: "Жесть, уже 6 пункт, а я ещё ничего не придумал",
-    color: "hsl(350 60% 52%)",
-  },
-  {
-    text: "Средняя помеха 7",
-	description: "Попросить зрителей придумать помеху",
-    color: "hsl(91 43% 54%)",
-  },
-  {
-    text: "Средняя помеха 8",
-	description: "Одна голова хорошо, а 8 голов вызывают подозрения",
-    color: "hsl(140 36% 74%)",
-  }
-];
-
-const big = [
-  {
-    text: "Большая помеха 1",
-	description: "попрыгать на одной ноге",
-    color: "hsl(197 30% 43%)",
-  },
-  { 
-    text: "Большая помеха 2",
-	description: "Какая-то помеха за второй пункт",
-    color: "hsl(173 58% 39%)",
-  },
-  { 
-    text: "Большая помеха 3",
-	description: "Придумать третий пункт",
-    color: "hsl(43 74% 66%)",
-  },
-  {
-    text: "Большая помеха 4",
-	description: "Что-то мешающее четвёртое",
-    color: "hsl(27 87% 67%)",
-  },
-  {
-    text: "Большая помеха 5",
-	description: "Памагити закончилась фантазия на 5 пункте",
-    color: "hsl(12 76% 61%)",
-  },
-  {
-    text: "Большая помеха 6",
-	description: "Жесть, уже 6 пункт, а я ещё ничего не придумал",
-    color: "hsl(350 60% 52%)",
-  },
-  {
-    text: "Большая помеха 7",
-	description: "Попросить зрителей придумать помеху",
-    color: "hsl(91 43% 54%)",
-  },
-  {
-    text: "Большая помеха 8",
-	description: "Одна голова хорошо, а 8 голов вызывают подозрения",
-    color: "hsl(140 36% 74%)",
-  }
-];
 
 let prizes = [];
 
@@ -267,17 +139,20 @@ if(startWheel){
 	startWheel = false;
 	spin();
 } else{
-	rest(selected);
+	remove(selected);
 	startWheel = true;
 }
 });
 
-function rest(selected){
+function remove(selected){
   description.innerHTML = 'Помеха ' + prizes[selected].text +' удалена';
   prizes.splice(selected,1);
   spinner.innerHTML = '';
   setupWheel();
-  
+  localStorage.setItem('small', JSON.stringify(small));
+  localStorage.setItem('medium', JSON.stringify(medium));
+  localStorage.setItem('big', JSON.stringify(big));
+
 }
 
 function spin(){ 
@@ -332,9 +207,9 @@ function typeInterference(text, time) {
 
  function setprize(obj) {
 	 switch(obj.id) {
-	 case 'small': prizes = small; break;
-	 case 'medium': prizes = medium; break;
-	 case 'big': prizes = big; break;
+	 case 'small': prizes = window.small; break;
+	 case 'medium': prizes = window.medium; break;
+	 case 'big': prizes = window.big; break;
 	 }
 	 startWheel = true;
 	 spinner.innerHTML = '';
