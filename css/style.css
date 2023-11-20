@@ -1,3 +1,4 @@
+
 /* Контейнер */
 .roulette {
 
@@ -14,6 +15,7 @@ position: center;
 -webkit-transition: opacity 500ms ease-in;
 -moz-transition: opacity 500ms ease-in;
 transition: opacity 500ms ease-in;
+background: linear-gradient(to bottom, #e08b4f, #39db39);
 
 /* Скрываем изначально */
 opacity: 0;
@@ -30,7 +32,6 @@ pointer-events: auto;
 .roulette > div {
 width: 1000px;
 height: 500px;
-background: #fff;
 position: relative;
 margin: 10% auto;
 
@@ -47,6 +48,7 @@ box-shadow: 0 3px 20px rgba(0,0,0,0.9);
 background: -moz-linear-gradient(#fff, #ccc);
 background: -webkit-gradient(linear, right bottom, right top, color-stop(1, rgb(255,255,255)), color-stop(0.57, rgb(230,230,230)));
 text-shadow: 0 1px 0 #fff;
+ background: linear-gradient(to bottom, #e08b4f, #39db39);
 }
 
 /* Изменяем анимацию при открытии модального окна*/

@@ -1,9 +1,15 @@
+
+body {
+background: linear-gradient(to bottom, #e08b4f, #39db39);
+}
+
 .left {
 width: 66%;
 float: left;
 background-image: url('../resources/snake.jpg');
 background-repeat: no-repeat;
 background-size: 100% 100%;
+border: 4mm ridge rgba(211, 220, 200, .6);
 border-color: green;
 }
 .board {
@@ -13,8 +19,7 @@ margin-right: 4%;
 margin-bottom: 3%;
 width: 92%;
 height: 94%;
-border: 1;
-border-color: red;
+
 
 }
 .right {

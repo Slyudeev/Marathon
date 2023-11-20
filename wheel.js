@@ -30,6 +30,7 @@ let rotation = 0;
 let currentSlice = 0;
 // переменная для текстовых подписей
 let prizeNodes;
+var isBlocked = false;
 
 // расставляем текст по секторам
 const createPrizeNodes = () => {
@@ -124,9 +125,6 @@ const selectPrize = () => {
   selected = Math.floor(rotation / prizeSlice);
   prizeNodes[selected].classList.add(selectedClass);
   console.log(prizes[selected]);
-  console.log(prizes);
-  //alert('Выпала ' + prizes[selected].text);
-  //alert(prizes[selected].description)
   description.innerHTML = '';
   typeInterference(prizes[selected].description, 2000);
 
@@ -135,12 +133,20 @@ const selectPrize = () => {
 
 // отслеживаем нажатие на кнопку
 spinner.addEventListener("click", () => {
+    if(!isBlocked){
+        isBlocked = true;
+ 
 if(startWheel){
 	startWheel = false;
 	spin();
 } else{
 	remove(selected);
 	startWheel = true;
+	isBlocked = false;
+}
+
+} else{
+    console.log(isBlocked);
 }
 });
 
@@ -186,6 +192,7 @@ spinner.addEventListener("transitionend", () => {
   spinner.style.setProperty("--rotate", rotation);
   // делаем кнопку снова активной
   //trigger.disabled = false;
+  isBlocked = false;
 });
 function typeInterference(text, time) {
   let currentTime = 0;

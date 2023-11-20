@@ -10,6 +10,8 @@ var dicetext = document.getElementById("score-result");
 var dicearea = document.getElementById("dicearea"); 
 var newGame_button = document.getElementById("new"); 
 var continueGame_button = document.getElementById("continue"); 
+var isBlocked = false;
+
 
 const snakePositions = [
   { start: 17, end: 13 },
@@ -46,21 +48,27 @@ newGame_button.addEventListener("click", start);
 continueGame_button.addEventListener("click", load);
 
 function start() {
+    if(!isBlocked){
+isBlocked = true;
 loadInterference();
 player_counter = [1, 1, 1];
 var player_next_position = document.getElementById(player_counter[1]);
 player_next_position.append(player1_coin);
-    
+isBlocked = false;
+}
 }
 
 function load(){
+        if(!isBlocked){
+isBlocked = true;
   window.small = JSON.parse(localStorage.getItem('small'));
   window.medium = JSON.parse(localStorage.getItem('medium'));
   window.big = JSON.parse(localStorage.getItem('big'));
   player_counter = JSON.parse(localStorage.getItem('player_counter'));
   var player_next_position = document.getElementById(player_counter[1]);
   player_next_position.append(player1_coin);
-  
+  isBlocked = false;
+}
 }
 
 
@@ -69,6 +77,8 @@ const sleep = (milliseconds) => {
 };
 
 async function dice_rolled() {
+        if(!isBlocked){
+isBlocked = true;
   dicearea.style.opacity = 1;
   //console.log(throwD(1));
   throwDice();
@@ -77,7 +87,8 @@ async function dice_rolled() {
   //random();
   //append_element(player_picker());
   append_element(1);
-  
+  isBlocked = false;
+}
 }
 
 function random() {

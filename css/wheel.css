@@ -37,7 +37,7 @@
 width: 50%;
 float: right;
 height: 100%;
-border: 4mm ridge rgba(211, 220, 50, .6);
+border: 4mm ridge rgba(211, 220, 200, .6);
 display: flex;
 align-items: center;
 justify-content: center;
