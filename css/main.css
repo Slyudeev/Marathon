@@ -42,8 +42,9 @@ background-size: cover
 height: 25%;
 }
 .modal {
-width: 100%;
-height: 100%;
+position: fixed;
+background: linear-gradient(to bottom, #e08b4f, #a34c0f);
+border: 4mm ridge rgba(211, 220, 200, .6);
 }
 
 .interferences {

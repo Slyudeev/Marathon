@@ -137,12 +137,18 @@
   </table>
 </div>
 <div class="right">
+  <div><table>
+      <td><button id="history" class="cookies">История действий</button></td>
+      <td><button id="rules" class="cookies">Правила</button></td>
+      </table></div>
   <div class="camera" id="score-result">
   
   </div> <!-- Место под камеру -->
+  
   <div id="dicetext"><tr/><h1 id="alerts"></h1></div>
   <!--div><canvas class="canvas" id="dicearea"></canvas></div> <!-- Место под бросание кубиков-->
-  <button id="dice-btn">Кинуть кубики</button>
+  
+  <button id="dice-btn" class="cookies">Кинуть кубики</button>
   <div class="roulettes">
   <table >	<!-- Рулетки помех -->
   <td><a href="#example" class="openModal" id="small" onClick = "setprize(this)">Маленькая помеха</a></td>
@@ -177,6 +183,7 @@
 		</script>
 <script type="module" src="script.js" ></script>
 <script type="text/javascript" src="wheel.js" ></script>
+<script type="module" src="js/main.js" ></script>
 <script type="module" src="js/dice.js" ></script>
 <script type="module" src="js/interference.js" ></script>
 </html>

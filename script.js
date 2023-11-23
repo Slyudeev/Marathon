@@ -1,6 +1,9 @@
 import {throwDice} from './js/dice.js';
 import {getDiceResult} from './js/dice.js';
 import {loadInterference} from './js/interference.js';
+import {writeHistory} from './js/main.js';
+import {flushHistory} from './js/main.js';
+import {loadHistory} from './js/main.js';
 
 var dice_button = document.getElementById("dice-btn");
 var dice_number = 0;
@@ -9,7 +12,8 @@ var alerts = document.getElementById("alerts");
 var dicetext = document.getElementById("score-result"); 
 var dicearea = document.getElementById("dicearea"); 
 var newGame_button = document.getElementById("new"); 
-var continueGame_button = document.getElementById("continue"); 
+var continueGame_button = document.getElementById("continue");
+var dices = document.querySelector('#dices');
 var isBlocked = false;
 
 
@@ -33,7 +37,7 @@ const ladderPositions = [
   { start: 90, end: 91 },
 ];
 
-var player1_coin = document.getElementById("koala");
+var koala_coin = document.getElementById("koala");
 /* Если нужен будет второй игрок
 var player2_coin = document.createElement("div");
 player2_coin.setAttribute("id", "player_coin2");
@@ -53,20 +57,23 @@ isBlocked = true;
 loadInterference();
 player_counter = [1, 1, 1];
 var player_next_position = document.getElementById(player_counter[1]);
-player_next_position.append(player1_coin);
+player_next_position.append(koala_coin);
+flushHistory();
 isBlocked = false;
 }
 }
 
 function load(){
-        if(!isBlocked){
-isBlocked = true;
+if(!isBlocked){
+  isBlocked = true;
   window.small = JSON.parse(localStorage.getItem('small'));
   window.medium = JSON.parse(localStorage.getItem('medium'));
   window.big = JSON.parse(localStorage.getItem('big'));
   player_counter = JSON.parse(localStorage.getItem('player_counter'));
   var player_next_position = document.getElementById(player_counter[1]);
-  player_next_position.append(player1_coin);
+  player_next_position.append(koala_coin);
+  loadHistory();
+  
   isBlocked = false;
 }
 }
@@ -80,17 +87,26 @@ async function dice_rolled() {
         if(!isBlocked){
 isBlocked = true;
   dicearea.style.opacity = 1;
-  //console.log(throwD(1));
   throwDice();
-  await sleep(2000);
+  await sleep(3000);
+  
   dice_number = getDiceResult();
-  //random();
-  //append_element(player_picker());
-  append_element(1);
+  movePlayer(1, dice_number);
   isBlocked = false;
 }
 }
-
+async function movePlayer(player, dice_number){
+    writeHistory(dicetext.innerText);
+    var startFrom = player_counter[player];
+    for (let i = 0; i < dice_number; ++i) {
+    player_counter[player] = player_counter[player] + 1;
+    document.getElementById(player_counter[player]).append(koala_coin);
+    await sleep(500);
+    }
+    writeHistory("Коала перешла с поля " + startFrom + " на поле " + player_counter[player]);
+    snake_or_ladder(player_counter[player], player);
+    localStorage.setItem('player_counter', JSON.stringify(player_counter));
+}
 function random() {
   var random_number = Math.ceil(Math.random() * 10);
   if (random_number > 6) {
@@ -113,40 +129,6 @@ function player_picker() {
   }
 }
 */
-function id_creator(num) {
-  return "box_" + num;
-}
-
-function coin_id_creator(num) {
-  var string = "player_coin";
-  string = string + num;
-  return string;
-}
-
-function counter(player) {
-  if (player_counter[player] + Number(dice_number) > 100) {
-    /* do nothing */
-  } else {
-    player_counter[player] =
-      player_counter[player] + Number(dice_number);
-	  var tmp = player_counter[player] - Number(dice_number);
-	  alerts.innerText = `Перешла с поля ${player_counter[player] - Number(dice_number)} на поле ${player_counter[player]}`;
-  }
-  
-}
-
-function append_element(player) {
-  counter(player);
-  
-  var player_next_position = document.getElementById(player_counter[player]);
-  if (player == 1) {
-    player_next_position.append(player1_coin);
-  } else {
-    player_next_position.append(player2_coin);
-  }
-  snake_or_ladder(player_counter[player], player);
-  localStorage.setItem('player_counter', JSON.stringify(player_counter));
-}
 
 function snake_or_ladder(counter, player) {
   for (var i = 0; i < snakePositions.length; i++) {
@@ -154,7 +136,8 @@ function snake_or_ladder(counter, player) {
     if (counter == start) {
       player_counter[player] = end;
       after_snake_or_ladder(player);
-	  alerts.innerText = `Коала сползла по змее на поле ${end}`;
+      alerts.innerText = `Коала сползла по змее с поля ${start} на поле ${end}`;
+	  writeHistory(`Коала сползла по змее с поля ${start} на поле ${end}`);
     }
   }
 
@@ -164,6 +147,7 @@ function snake_or_ladder(counter, player) {
       player_counter[player] = end;
       after_snake_or_ladder(player);
 	  alerts.innerText = `Коала поднялась по лестнице на поле ${end}`;
+	  writeHistory(`Коала поднялась по лестнице с поля ${start} на поле ${end}`);
     }
   }
 
@@ -172,10 +156,11 @@ function snake_or_ladder(counter, player) {
   }
 }
 
-function after_snake_or_ladder(player) {
+async function after_snake_or_ladder(player) {
+  await sleep(500);
   var player_next_position = document.getElementById(player_counter[player]);
   if (player == 1) {
-    player_next_position.append(player1_coin);
+    player_next_position.append(koala_coin);
   } else {
     player_next_position.append(player2_coin);
   }
