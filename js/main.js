@@ -1,6 +1,11 @@
-
 var currentModal = "none";
 var history = [];
+const invetoryDict = {	
+'ignoreLadder': 'Количество лестниц, которые не будут использованы',
+'ignoreSnake': 'Количество спасений от змей',
+'additionalDice': 'Количество дополнительных кубиков',
+'additionalMove': 'Ход будет увеличен на',
+'reducedMove': 'Ход будет уменьшен на' }
 
 export function writeHistory(text){
     history.push(text);
@@ -24,22 +29,23 @@ function printHistory(){
  return result;
 }
 
+function printInventory(){
+  var result = "";
+    for (let [key, value] of window.inventory) {
+        result += `${invetoryDict[key]}: ${value}\n`;
+    }
+ return result;
+}
 // Выбираем элемент, который будет открывать модальное окно
 const historyButton = document.getElementById("history");
 const rulesButton = document.getElementById("rules");
-
+const inventoryButton = document.getElementById("inventory");
 // Создаем элемент модального окна
 const modal = document.createElement("div");
 modal.id = "modal";
 modal.classList.add("modal");
-
-// Добавляем содержимое модального окна (в данном случае - кнопка закрытия)
-/*const closeButton = document.createElement("button");
-closeButton.textContent = "Ок";
-closeButton.classList.add("close");
-modal.appendChild(closeButton);*/
-
 const textArea = document.createElement("div");
+
 function openHistory(){
   document.body.appendChild(modal);
   modal.style.top = "5%";
@@ -64,6 +70,18 @@ function openRules(){
   textArea.scrollTop = textArea.scrollHeight;
   modal.appendChild(textArea);
 }
+
+function openInventory(){
+  document.body.appendChild(modal);
+  modal.style.top = "10%";
+  modal.style.left= "66%";
+  modal.style.width = "33%";
+  modal.style.height = "33%";
+  modal.style.float = "center";
+  textArea.innerText = printInventory();
+  textArea.scrollTop = textArea.scrollHeight;
+  modal.appendChild(textArea);
+}
 // Привяжем обработчик события на кнопку, которая открывает модальное окно
 rulesButton.addEventListener("click", () => {
     if(currentModal === "rules") {
@@ -76,6 +94,16 @@ rulesButton.addEventListener("click", () => {
 
 });
 
+inventoryButton.addEventListener("click", () => {
+    if(currentModal === "inventory") {
+        currentModal = "none";
+        modal.remove();
+    } else {
+        openInventory();
+        currentModal = "inventory";
+    }
+
+});
 
 // Привяжем обработчик события на кнопку, которая открывает модальное окно
 historyButton.addEventListener("click", () => {

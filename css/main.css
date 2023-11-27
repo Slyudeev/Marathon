@@ -4,7 +4,8 @@ background: linear-gradient(to bottom, #e08b4f, #39db39);
 }
 
 .left {
-width: 66%;
+width: 75%;
+height: 100%;
 float: left;
 background-image: url('../resources/snake.jpg');
 background-repeat: no-repeat;
@@ -14,16 +15,14 @@ border-color: green;
 }
 .board {
 margin-left: 4%;
-margin-top: 3%;
+margin-top: 2.8%;
 margin-right: 4%;
 margin-bottom: 3%;
-width: 92%;
-height: 94%;
-
-
+width: 92.5%;
+height: 91.5%;
 }
 .right {
-width: 33%;
+width: 25%;
 float: right;
 }
 
@@ -31,12 +30,6 @@ float: right;
 height: 25%;
 }
 
-.dice {
-height: 25%;
-background-image: url('../resources/nardypole-1.jpg');
-background-repeat: no-repeat;
-background-size: cover
-}
 
 .roulettes {
 height: 25%;
@@ -85,7 +78,31 @@ box-shadow: 0 1px 1px rgba(0,0,0,0.3);
 }
 
 .cookies:hover,
-.cookiesl:focus {
+.cookies:focus {
+background: -moz-linear-gradient(#fff, #ccc);
+background: -webkit-gradient(linear, right top, right bottom, from(rgb(255,255,255)), to(rgb(200,200,200)));
+}
+
+.spinnerButton {
+margin: 10px 10px;
+display: inline-block;
+width: 200px;
+background: #ccc;
+text-align: center;
+padding: 10px;
+-moz-border-radius: 7px;
+border-radius: 7px;
+background: -moz-linear-gradient(#fff, #ddd);
+background: -webkit-gradient(linear, right top, right bottom, from(rgb(255,255,255)), to(rgb(230,230,230)));
+text-shadow: 0 1px 0 #fff;
+border: 1px solid rgba(0,0,0,0.1);
+-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+}
+
+.spinnerButton:hover,
+.spinnerButton:focus {
 background: -moz-linear-gradient(#fff, #ccc);
 background: -webkit-gradient(linear, right top, right bottom, from(rgb(255,255,255)), to(rgb(200,200,200)));
 }

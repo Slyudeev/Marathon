@@ -151,27 +151,17 @@
   <button id="dice-btn" class="cookies">Кинуть кубики</button>
   <div class="roulettes">
   <table >	<!-- Рулетки помех -->
-  <td><a href="#example" class="openModal" id="small" onClick = "setprize(this)">Маленькая помеха</a></td>
-  <td><a href="#example" class="openModal" id="medium" onClick = "setprize(this)">Средняя помеха</a></td>
-  <td><a href="#example" class="openModal" id="big" onClick = "setprize(this)">Большая помеха</a></td>
+  <td><button class="openModal" id="small" onClick = "setprize(this)">Зрительские помехи</button></td>
+  <td><button class="openModal" id="board" onClick = "setprize(this)">Рулетка модификаторов</button></td>
   </table>
+  <button class="openModal" id="inventory">Список модификаторов</button>
 	  </div>
    <div><table>
        <td><button class="cookies" id="new">Новая игра</button></td>
        <td><button class="cookies" id="continue">Продолжить</button></td>
     </table></div>
 	  </div>
-<aside id="example" class="roulette">
-		<div>
-			<div class="deal-wheel">
-				<ul class="spinner"></ul>
-				<!-- язычок барабана -->
-				<div class="ticker"></div>
-				</div>
-				<div class="descriptionArea"><h1 class="description"></h1></div>
-			<a href="#close" title="Закрыть"></a>
-		</div>
-	</aside>
+
 </body>
 		<script type="importmap">
 		  {

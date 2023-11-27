@@ -2,15 +2,36 @@
 
 let prizes = [];
 
-// создаём переменные для быстрого доступа ко всем объектам на странице — блоку в целом, колесу, кнопке и язычку
-const roulette = document.querySelector(".roulette");
-const wheel = document.querySelector(".deal-wheel");
-const spinner = wheel.querySelector(".spinner");
-const ticker = wheel.querySelector(".ticker");
-const smallbtn = document.querySelector(".smallW");
-const mediumbtn = document.querySelector(".mediumW");
-const bigbtn = document.querySelector(".bigW");
-const description = document.querySelector(".description");
+//Создаём окно рулетки
+const roulette = document.createElement("div");
+roulette.id = "roulette";
+roulette.classList.add("roulette");
+const wheel = document.createElement("div");
+wheel.classList.add("deal-wheel");
+const spinner = document.createElement("ul");
+spinner.classList.add("spinner");
+const ticker = document.createElement("div");
+ticker.classList.add("ticker");
+const descriptionArea = document.createElement("div");
+descriptionArea.classList.add("descriptionArea");
+const description = document.createElement("h1");
+description.classList.add("description");
+const div = document.createElement("div");
+const closeButton = document.createElement("button");
+closeButton.classList.add("spinnerButton");
+closeButton.textContent = "Закрыть колесо";
+const removeAndcloseButton = document.createElement("button");
+removeAndcloseButton.classList.add("spinnerButton");
+removeAndcloseButton.textContent = "Удалить помеху и закрыть колесо";
+const spinButton = document.createElement("button");
+spinButton.classList.add("spinnerButton"); 
+spinButton.textContent = "Крутить колесо ещё раз";
+const removeAndSpinButton = document.createElement("button");
+removeAndSpinButton.classList.add("spinnerButton");
+removeAndSpinButton.textContent = "Удалить помеху и крутить колесо ещё раз";
+const buttonArea = document.createElement("div");
+buttonArea.classList.add("buttonArea");
+
 // на сколько секторов нарезаем круг
 let prizeSlice = 360 / prizes.length;
 // на какое расстояние смещаем сектора друг относительно друга
@@ -21,7 +42,8 @@ const selectedClass = "selected";
 let selected = 0;
 // получаем все значения параметров стилей у секторов
 const spinnerStyles = window.getComputedStyle(spinner);
-let startWheel = true;
+let startWheel = true; //Первое открытие окна
+let wheelType = "none"; 
 // переменная для анимации
 let tickerAnim;
 // угол вращения
@@ -34,8 +56,6 @@ var isBlocked = false;
 
 // расставляем текст по секторам
 const createPrizeNodes = () => {
-
-
   // обрабатываем каждую подпись
   prizes.forEach(({ text, color, reaction }, i) => {
     // каждой из них назначаем свой угол поворота
@@ -56,8 +76,9 @@ $('.btn-spin').click(function(){
 		$('.roulette').css({'visibility': 'visible', 'opacity': 1, 'top': '50%'});
 });
 }
-// рисуем разноцветные секторы
+// рисуем разноцветные секторыz
 const createConicGradient = () => {
+    
   // устанавливаем нужное значение стиля у элемента spinner
   spinner.setAttribute(
     "style",
@@ -84,6 +105,7 @@ const setupWheel = () => {
   createPrizeNodes();
   // а потом мы получим список всех призов на странице, чтобы работать с ними как с объектами
   prizeNodes = wheel.querySelectorAll(".prize");
+  wheel.style.fontSize = `calc(var(--size) / 26)`;
 };
 
 // определяем количество оборотов, которое сделает наше колесо
@@ -119,35 +141,78 @@ const runTickerAnimation = () => {
   // запускаем анимацию
   tickerAnim = requestAnimationFrame(runTickerAnimation);
 };
-
+function removeButton(){
+removeAndcloseButton.remove();
+closeButton.remove();
+spinButton.remove();
+removeAndSpinButton.remove();
+}
 // функция выбора призового сектора
 const selectPrize = () => {
   selected = Math.floor(rotation / prizeSlice);
   prizeNodes[selected].classList.add(selectedClass);
-  console.log(prizes[selected]);
   description.innerHTML = '';
   typeInterference(prizes[selected].description, 2000);
-
+  removeButton();
+  if (wheelType === 'small' || prizes[selected].action === 'koalaHunter') {
+      buttonArea.appendChild(removeAndSpinButton);
+      buttonArea.appendChild(removeAndcloseButton);
+  } else {
+      buttonArea.appendChild(spinButton);
+      buttonArea.appendChild(closeButton);
+  }
+  
 
 };
 
-// отслеживаем нажатие на кнопку
-spinner.addEventListener("click", () => {
+closeButton.addEventListener("click", () => {
+if(!isBlocked){
+    isBlocked = true;
+    removeButton();
+    roulette.remove();
+} else {
+        console.log(isBlocked);
+    }
+});
+removeAndSpinButton.addEventListener("click", () => {
     if(!isBlocked){
         isBlocked = true;
- 
-if(startWheel){
-	startWheel = false;
-	spin();
-} else{
-	remove(selected);
-	startWheel = true;
-	isBlocked = false;
-}
-
+	    remove(selected);
+	    spin();
+    } else {
+        console.log(isBlocked);
+    }
+});
+spinButton.addEventListener("click", () => {
+    if(!isBlocked){
+        isBlocked = true;
+	    spin();
 } else{
     console.log(isBlocked);
 }
+});
+removeAndcloseButton.addEventListener("click", () => {
+    if(!isBlocked){
+        isBlocked = true;
+	    remove(selected);
+	    removeButton();
+	    roulette.remove();
+} else{
+    console.log(isBlocked);
+}
+}); 
+// отслеживаем нажатие на кнопку
+spinner.addEventListener("click", () => {
+    if(startWheel){
+        startWheel = false;
+    if(!isBlocked){
+        isBlocked = true;
+	    spin();
+} else{
+    console.log(isBlocked);
+}
+        
+    }
 });
 
 function remove(selected){
@@ -156,8 +221,7 @@ function remove(selected){
   spinner.innerHTML = '';
   setupWheel();
   localStorage.setItem('small', JSON.stringify(small));
-  localStorage.setItem('medium', JSON.stringify(medium));
-  localStorage.setItem('big', JSON.stringify(big));
+  localStorage.setItem('board', JSON.stringify(board));
 
 }
 
@@ -192,7 +256,7 @@ spinner.addEventListener("transitionend", () => {
   spinner.style.setProperty("--rotate", rotation);
   // делаем кнопку снова активной
   //trigger.disabled = false;
-  isBlocked = false;
+  
 });
 function typeInterference(text, time) {
   let currentTime = 0;
@@ -209,16 +273,33 @@ function typeInterference(text, time) {
 
     clearInterval(timer);
   }, interval);
+  isBlocked = false;
+}
+function openWheelWindow(){
+    
+    // Создаем элемент модального окна
+
+document.body.appendChild(roulette);
+roulette.appendChild(div);
+div.appendChild(wheel);
+wheel.appendChild(spinner);
+wheel.appendChild(ticker);
+div.appendChild(descriptionArea);
+descriptionArea.appendChild(description);
+div.appendChild(buttonArea);
+roulette.style.opacity = 1;
+roulette.style.pointerEvents="auto";
 }
 
-
- function setprize(obj) {
+function setprize(obj) {
 	 switch(obj.id) {
-	 case 'small': prizes = window.small; break;
+	 case 'small': prizes = window.small; wheelType = 'small'; break;
 	 case 'medium': prizes = window.medium; break;
-	 case 'big': prizes = window.big; break;
+	 case 'board': prizes = window.board; wheelType = 'board'; break;
 	 }
+	 openWheelWindow();
 	 startWheel = true;
+	 isBlocked = false;
 	 spinner.innerHTML = '';
 	 description.innerText = 'Щёлкнуть на колесо для выбора помехи';
 	 setupWheel();

@@ -15,7 +15,8 @@ var newGame_button = document.getElementById("new");
 var continueGame_button = document.getElementById("continue");
 var dices = document.querySelector('#dices');
 var isBlocked = false;
-
+window.inventory = new Map();
+window.quickSand = [];
 
 const snakePositions = [
   { start: 17, end: 13 },
@@ -51,6 +52,14 @@ dice_button.addEventListener("click", dice_rolled);
 newGame_button.addEventListener("click", start);
 continueGame_button.addEventListener("click", load);
 
+function initInventory(){
+    window.inventory.set("ignoreLadder", 0);
+    window.inventory.set("ignoreSnake", 0);
+    window.inventory.set("additionalDice", 0);
+    window.inventory.set("additionalMove",0);
+    window.inventory.set("reducedMove",0);
+}
+
 function start() {
     if(!isBlocked){
 isBlocked = true;
@@ -58,7 +67,7 @@ loadInterference();
 player_counter = [1, 1, 1];
 var player_next_position = document.getElementById(player_counter[1]);
 player_next_position.append(koala_coin);
-flushHistory();
+initInventory();
 isBlocked = false;
 }
 }
@@ -68,12 +77,13 @@ if(!isBlocked){
   isBlocked = true;
   window.small = JSON.parse(localStorage.getItem('small'));
   window.medium = JSON.parse(localStorage.getItem('medium'));
-  window.big = JSON.parse(localStorage.getItem('big'));
+  window.board = JSON.parse(localStorage.getItem('board'));
+  window.inventory = JSON.parse(localStorage.getItem('inventory'));
+  window.quickSand = JSON.parse(localStorage.getItem('quickSand'));
   player_counter = JSON.parse(localStorage.getItem('player_counter'));
   var player_next_position = document.getElementById(player_counter[1]);
   player_next_position.append(koala_coin);
   loadHistory();
-  
   isBlocked = false;
 }
 }
@@ -101,6 +111,10 @@ async function movePlayer(player, dice_number){
     for (let i = 0; i < dice_number; ++i) {
     player_counter[player] = player_counter[player] + 1;
     document.getElementById(player_counter[player]).append(koala_coin);
+    if(player_counter[player] == 100) {
+        alert(`Игра окончена`);
+        writeHistory("Коала победила");
+    }
     await sleep(500);
     }
     writeHistory("Коала перешла с поля " + startFrom + " на поле " + player_counter[player]);
