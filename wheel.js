@@ -161,9 +161,42 @@ const selectPrize = () => {
       buttonArea.appendChild(spinButton);
       buttonArea.appendChild(closeButton);
   }
-  
-
+  if(wheelType === 'board') {
+      addBoardModification(prizes[selected]);
+  }
+    
 };
+function addBoardModification(sector){
+    switch(sector.action) {//my_dict[key] = my_dict.get(key, 0) + 1
+	 case 'ignoreLadder': window.inventory.set("ignoreLadder",window.inventory.get('ignoreLadder', 0) + 1); break;
+	 case 'ignoreSnake':  window.inventory.set("ignoreSnake",window.inventory.get('ignoreSnake', 0) + 1); break;
+	 case 'additionalDice':  window.inventory.set("additionalDice",window.inventory.get('additionalDice', 0) + 1); break;
+	 case 'additionalMove':  window.inventory.set("additionalMove",window.inventory.get('additionalMove', 0) + sector.count); break;
+	 case 'reducedMove':  window.inventory.set("reducedMove",window.inventory.get('reducedMove', 0) + sector.count); break;
+	 case 'quickSand' : chooseQuickSandCell(sector.count); break;
+     case 'koalaHunter' : addNewPlayer(); break;
+    }
+	 localStorage.setItem('inventory', JSON.stringify(window.inventory));
+	 localStorage.setItem('quickSand', JSON.stringify(window.quickSand));
+	 
+}
+function addNewPlayer(){
+    window.koalaHunter = true;
+    writeHistory("Чат вышел на охоту за Коалой");
+    
+}
+function chooseQuickSandCell(count){
+    console.log(window.freecells);
+    console.log(window.quickSand);
+    for(let i = 0; i < count; ++i){
+        let cell = window.freecells[Math.floor(Math.random() * window.freecells.length)];
+        window.quickSand.push(cell);
+        window.freecells = window.freecells.filter(x => ![cell].includes(x));
+    }
+    console.log(window.freecells);
+    console.log(window.quickSand);
+}
+
 
 closeButton.addEventListener("click", () => {
 if(!isBlocked){

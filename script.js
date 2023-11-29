@@ -15,12 +15,14 @@ var newGame_button = document.getElementById("new");
 var continueGame_button = document.getElementById("continue");
 var dices = document.querySelector('#dices');
 var isBlocked = false;
+window.koalaHunter = false;
+window.freecells = (new Array(99)).fill(1).map((a,i)=>i+1);
 window.inventory = new Map();
 window.quickSand = [];
 
 const snakePositions = [
   { start: 17, end: 13 },
-  { start: 52, end: 19 },
+  { start: 52, end: 29 },
   { start: 57, end: 40 },
   { start: 62, end: 22 },
   { start: 88, end: 19 },
@@ -37,6 +39,8 @@ const ladderPositions = [
   { start: 80, end: 100 },
   { start: 90, end: 91 },
 ];
+window.freecells = window.freecells.filter(x => ![3,8,17,28,52,57,58,62,75,80,88,90,95,97].includes(x));
+
 
 var koala_coin = document.getElementById("koala");
 /* Если нужен будет второй игрок
@@ -92,15 +96,39 @@ if(!isBlocked){
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
 };
-
+function saveInventory(){
+    localStorage.setItem('inventory', JSON.stringify(window.inventory));
+}
 async function dice_rolled() {
         if(!isBlocked){
 isBlocked = true;
   dicearea.style.opacity = 1;
-  throwDice();
+  if(window.inventory.get("additionalDice") > 0) {
+    writeHistory(`в этот ход будет увеличено число кубиков на ${window.inventory.get("additionalDice")}`);
+    throwDice(window.inventory.get("additionalDice") + 1);
+    window.inventory.set("additionalDice", 0);
+    saveInventory();
+    } else { 
+        throwDice(1);
+    }
   await sleep(3000);
-  
+
   dice_number = getDiceResult();
+  if(window.inventory.get("additionalMove") > 0) {
+    writeHistory(`Количество пройденных клеток увеличено на ${window.inventory.get("additionalMove")}`);
+    dice_number += window.inventory.get("additionalMove");
+    window.inventory.set("additionalMove", 0);
+    saveInventory();
+    }
+  if(window.inventory.get("reducedMove") > 0) {
+    writeHistory(`Количество пройденных клеток уменьшено на ${window.inventory.get("additionalMove")}, но ход не может быть менее 1`);
+    dice_number -= window.inventory.get("additionalMove");
+    if(dice_number < 1){
+        dice_number = 1;
+    }
+    window.inventory.set("additionalMove", 0);
+    saveInventory();
+    }
   movePlayer(1, dice_number);
   isBlocked = false;
 }
@@ -148,20 +176,30 @@ function snake_or_ladder(counter, player) {
   for (var i = 0; i < snakePositions.length; i++) {
     const { start, end } = snakePositions[i];
     if (counter == start) {
+        if(window.inventory.get("ignoreSnake") > 0) {
+            writeHistory(`Опытный змеелов ценой своей жизни спас коалу от змеи на поле ${start}`);
+            window.inventory.set("ignoreSnake",window.inventory.get('ignoreSnake', 0) - 1);
+        } else {
       player_counter[player] = end;
       after_snake_or_ladder(player);
       alerts.innerText = `Коала сползла по змее с поля ${start} на поле ${end}`;
 	  writeHistory(`Коала сползла по змее с поля ${start} на поле ${end}`);
+        }
     }
   }
 
   for (var j = 0; j < ladderPositions.length; j++) {
     const { start, end } = ladderPositions[j];
     if (counter == start) {
+                if(window.inventory.get("ignoreLadder") > 0) {
+            writeHistory(`Все мысли коалы заполонили очередные помехи, и она не заметила лестницу на поле ${start}`);
+            window.inventory.set("ignoreLadder",window.inventory.get('ignoreLadder', 0) - 1);
+        } else {
       player_counter[player] = end;
       after_snake_or_ladder(player);
 	  alerts.innerText = `Коала поднялась по лестнице на поле ${end}`;
 	  writeHistory(`Коала поднялась по лестнице с поля ${start} на поле ${end}`);
+        }
     }
   }
 

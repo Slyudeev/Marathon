@@ -18,7 +18,7 @@ const params = {
     notchDepth: .1,
 };
 
-const diceArray = [];
+let diceArray = [];
 
 initPhysics();
 initScene();
@@ -27,6 +27,7 @@ window.addEventListener('resize', updateSceneSize);
 //rollBtn.addEventListener('click', throwDice);
 
 function initScene() {
+    diceArray = [];
     renderer = new THREE.WebGLRenderer({
         alpha: true,
         antialias: true,
@@ -55,15 +56,17 @@ function initScene() {
     
     createFloor();
     diceMesh = createDiceMesh();
-    for (let i = 0; i < params.numberOfDice; i++) {
-        diceArray.push(createDice());
-        addDiceEvents(diceArray[i]);
-    }
+    //addDice(2);
 
     
     render();
 }
-
+function addDice(count){
+    for (let i = 0; i < count; i++) {
+        diceArray.push(createDice());
+        addDiceEvents(diceArray[i]);
+    }
+}
 function initPhysics() {
     physicsWorld = new CANNON.World({
         allowSleep: true,
@@ -299,9 +302,13 @@ function updateSceneSize() {
 export function getDiceResult() {
     return diceresult;
 }
-export function throwDice() {
-    scoreResult.innerHTML = 'Выпало значение ';
+export function throwDice(count) {
     diceresult = 0;
+    initPhysics();
+    initScene();
+    diceArray = [];
+    scoreResult.innerHTML = 'Выпало значение ';
+    addDice(count);
     diceArray.forEach((d, dIdx) => {
 
         d.body.velocity.setZero();
